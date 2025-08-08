@@ -1,0 +1,282 @@
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #000000 0%, #534646 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .game-container {
+            background: rgba(216, 204, 204, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .game-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .game-info {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+            padding: 15px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 10px;
+        }
+
+        .current-turn {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #333;
+            text-align: center;
+        }
+
+        .controls {
+            display: none;
+        }
+
+        button {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .reset-btn {
+            background: #5d4a4a;
+            color: white;
+        }
+
+        .reset-btn:hover {
+            background: #373030;
+            transform: translateY(-2px);
+        }
+
+
+
+        .rotate-btn {
+            background: #66377b;
+            color: white;
+        }
+
+        .rotate-btn:hover {
+            background: #492757;
+            transform: translateY(-2px);
+        }
+
+        .back-btn {
+            background: #c29b61;
+            color: white;
+        }
+
+        .back-btn:hover {
+            background: #b18f57;
+            transform: translateY(-2px);
+        }
+
+        .game-layout {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .board-section {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .captured-pieces-left, .captured-pieces-right {
+            display: grid;
+            grid-template-columns: repeat(2, 90px);
+            grid-template-rows: repeat(8, 90px);
+            grid-auto-flow: column;
+            gap: 10px;
+            justify-content: center;
+            align-content: start;
+            min-width: 200px;
+            max-width: 200px;
+        }
+
+        .controls-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .board-controls {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .chessboard {
+            display: grid;
+            grid-template-columns: repeat(8, 90px);
+            grid-template-rows: repeat(8, 90px);
+            border: 4px solid #8b4513;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin: 0;
+            transition: transform 0.5s ease;
+        }
+
+        .chessboard.rotated-90 {
+            transform: rotate(90deg);
+        }
+
+        .chessboard.rotated-180 {
+            transform: rotate(180deg);
+        }
+
+        .chessboard.rotated-270 {
+            transform: rotate(270deg);
+        }
+
+        .square {
+            width: 90px;
+            height: 90px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 64px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+            user-select: none;
+        }
+
+        .square.light {
+            background-color: #dfdad2;
+        }
+
+        .square.dark {
+            background-color: #a27650;
+        }
+
+        .square.selected {
+            background-color: #6db3d8 !important;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.564);
+        }
+
+        .square.valid-move {
+            background-color: #05910c !important;
+            box-shadow: inset 0 0 20px rgba(57, 54, 54, 0.564);
+        }
+
+        .square.valid-move::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: rgba(76, 175, 80, 0.8);
+        }
+
+        .square.capture-move {
+            background-color: #ffab91 !important;
+        }
+
+        .square.capture-move::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            border: 4px solid #ff5722;
+            border-radius: 50%;
+        }
+
+        .square:hover {
+            transform: scale(1.1);
+        }
+
+        .white-piece {
+            color: #928e8e;
+             -webkit-text-stroke: 2px #928e8e;
+            text-shadow: 2px 2px 4px rgba(65, 63, 63, 0.8);
+        }
+
+        .black-piece {
+            color: #222;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+        }
+
+        .game-status {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+        .check {
+            color: #ff5722;
+            animation: pulse 1s infinite;
+        }
+
+        .checkmate {
+            color: #d32f2f;
+            font-size: 1.5em;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .move-history {
+            max-height: 400px;
+            overflow-y: auto;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            padding: 15px;
+            min-width: 200px;
+            max-width: 250px;
+            text-align: center;
+        }
+
+        .move-history h3 {
+            margin-bottom: 10px;
+            color: #333;
+            text-align: center;
+        }
+
+        .move-list {
+            font-family: monospace;
+            font-size: 14px;
+            text-align: center;
+        }
