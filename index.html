@@ -1,39 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Chess Game</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
 </head>
 <body>
     <div class="game-container">
         <div class="game-header">
             <h1>♔ Chess Game ♛</h1>
         </div>
-        
+
         <div class="game-info">
             <div class="current-turn" id="current-turn">White to move</div>
         </div>
-        
+
         <div class="game-layout">
-            <div class="board-section">
-                <div class="captured-pieces captured-pieces-top" id="captured-pieces-top"></div>
-                
-                <div class="chessboard-container">
-                    <div class="chessboard" id="chessboard"></div>
-                </div>
-                
-                <div class="captured-pieces captured-pieces-bottom" id="captured-pieces-bottom"></div>
-            </div>
-            
+            <!-- Controls on Left -->
             <div class="controls-section">
                 <div class="board-controls">
                     <button class="back-btn" id="back-btn">← Back</button>
                     <button class="rotate-btn" id="rotate-btn">↻ Rotate</button>
                     <button class="reset-btn" id="reset-btn">↺ Reset</button>
                 </div>
-                
+            </div>
+
+            <!-- Board in Center -->
+            <div class="board-section">
+                <div class="captured-pieces" id="captured-pieces-top"></div>
+                <div class="chessboard" id="chessboard"></div>
+                <div class="captured-pieces" id="captured-pieces-bottom"></div>
+            </div>
+
+            <!-- Move History on Right -->
+            <div class="history-section">
                 <div class="move-history">
                     <h3>Move History</h3>
                     <div class="move-list" id="move-list"></div>
@@ -41,6 +42,20 @@
             </div>
         </div>
     </div>
+
+    <!-- Pawn Promotion Modal -->
+    <div class="promotion-modal" id="promotion-modal">
+        <div class="promotion-content">
+            <h3>Promote Pawn to:</h3>
+            <div class="promotion-options">
+                <button class="promotion-btn" data-piece="queen">♛ Queen</button>
+                <button class="promotion-btn" data-piece="rook">♜ Rook</button>
+                <button class="promotion-btn" data-piece="bishop">♝ Bishop</button>
+                <button class="promotion-btn" data-piece="knight">♞ Knight</button>
+            </div>
+        </div>
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>
